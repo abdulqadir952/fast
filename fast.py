@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from fastapi.responses import StreamingResponse
 import io
 import numpy as np
-# import test
+import test
 app = FastAPI()
 
 @app.post("/Summation")
@@ -35,10 +35,10 @@ async def Summation(info : Request):
 
 
 
-# @app.get("/credentials")
-# async def getCred():
-#     obj=test.main()
-#     return {
-#         "status" : "SUCCESS",
-#         "array" : obj
-#     }
+@app.get("/credentials")
+async def getCred():
+    obj=test.main()
+    return {
+        "status" : "SUCCESS",
+        "array" : obj
+    }
