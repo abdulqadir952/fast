@@ -172,6 +172,7 @@ text-decoration: line-through;
 </audio>
 <div class="sound">sound</div>
   <script src='http://cdn.jsdelivr.net/mojs/latest/mo.min.js'></script>
+  <script src='mo.min.js'></script>
 
     <!-- <script src="js/index.js"></script> -->
     <script>
