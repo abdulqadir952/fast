@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Request,Response
 from matplotlib import pyplot as plt
 from fastapi.responses import StreamingResponse
+from starlette.background import BackgroundTask
 import io
+import os
 import numpy as np
-# import test
+import test,texttospeech
 app = FastAPI()
 
 @app.post("/Summation")
@@ -42,3 +44,14 @@ async def getPieChart(info : Request):
 #         "status" : "SUCCESS",
 #         "array" : obj
 #     }
+@app.get("/textToSpeech")
+async def textToSpeech(info : Request):
+    req_info = await info.json()
+    mp3 = io.BytesIO()
+    obj=texttospeech.textToSpeech(req_info["text"],req_info["language"])
+    def iterfile():  
+        with open("welcome.mp3", mode="rb") as file_like:  
+            yield from file_like
+    def cleanup():
+        os.remove("welcome.mp3")
+    return StreamingResponse(iterfile(), media_type="audio/mp3",background=BackgroundTask(cleanup))
